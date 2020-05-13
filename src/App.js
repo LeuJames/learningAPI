@@ -1,16 +1,18 @@
-import React, {useState} from 'react';
+import React, { useState} from 'react';
 import './App.css';
+import axios from 'axios';
 
 function App() {
-  const [pokemon, setPokemon] = useState([]);
+  const [pokemon, setPokemon] = useState(null);
 
   const handleClick = () => {
-      console.log('hello')
-        fetch('https://pokeapi.co/api/v2/pokemon/?limit=807')
-            .then(response => response.json())
-            .then(response => setPokemon(response.results))
+      console.log('hello');
+      axios.get('https://pokeapi.co/api/v2/pokemon/?limit=807')
+          .then(res => setPokemon(res.data.results))
+          .catch(err => console.log(err));
   }
   
+
   return (
     <div className="App">
       <div>
